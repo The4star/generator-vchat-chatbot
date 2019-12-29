@@ -1,0 +1,54 @@
+@import "../../../style-variables.scss";
+.card {
+    width: 250px;
+    height: 280px;
+    overflow-x: hidden;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    margin: 10px 20px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+
+    h3 {
+        font-size: 18px;
+        color: black;
+    }
+
+    p {
+        font-size: 15px;
+        color: black;
+    }
+    .price {
+        color: #D64C4C;
+    }
+
+    .img-container {
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+        vertical-align: middle;
+
+        img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            vertical-align: middle;
+        }  
+    }
+
+    button {
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 18px;
+        margin: 10px;
+        background: $chatbot-card-button-color;
+        color: antiquewhite;
+        border: none;
+        cursor: pointer;
+    }
+}

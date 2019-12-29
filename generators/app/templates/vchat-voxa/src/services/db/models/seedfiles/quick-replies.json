@@ -1,0 +1,22 @@
+[
+    {
+        "text": "Show Card Examples",
+        "payload": "show me example cards",
+        "intent": "LaunchIntent"
+    },
+    {
+        "text": "Help Me!",
+        "payload": "Help me",
+        "intent": "LaunchIntent"
+    },
+    {
+        "text": "Restaurant Cards",
+        "payload": "Restaurant Cards",
+        "intent": "ShowCardIntent"
+    },
+    {
+        "text": "Item Cards",
+        "payload": "Item Cards",
+        "intent": "ShowCardIntent"
+    }
+]

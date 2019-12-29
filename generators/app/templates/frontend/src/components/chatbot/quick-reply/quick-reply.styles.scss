@@ -1,0 +1,15 @@
+@import "../../../style-variables.scss";
+.quick-reply {
+
+    button, .react-link {
+        font-size: 25px;
+        padding: 10px;
+        margin: 5px;
+        background: $chatbot-quickreply-container-color;
+        color: antiquewhite;
+        border: none;
+        border-radius: 10px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+}

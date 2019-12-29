@@ -1,0 +1,12 @@
+{
+	"server": {
+		"port": 3500,
+		"hostSkill": true
+  },
+  "googleAnalytics": {
+    "trackingId": "UA-XXXX-X",
+    "appName": "vchat-voxa",
+    "ignoreUsers": [],
+    "suppressSending": true
+  }
+}

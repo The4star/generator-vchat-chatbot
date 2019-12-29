@@ -1,0 +1,68 @@
+{
+  "en": {
+    "translation": {
+      "Launch": {
+        "Welcome": {
+          "text": [
+            "Welcome To Vchat✌️. A chatbot boilerplate to speed up development. You can edit my appearance and content easily. Then Deploy by pasting my injection script into the header of the target website. ",
+            "Thanks for choosing Vchat ✌️. A chatbot boilerplate to speed up development. You can edit my appearance and content easily. Then Deploy by pasting my injection script into the header of the target website. "
+          ]
+        }
+      },
+      "Yes": {
+        "text": [
+          "Great! ",
+          "Sure",
+          "Awesome!"
+        ]
+      },
+      "No": {
+        "text": [
+          "that's ok",
+          "No worries"
+        ]
+      },
+      "Cancel": {
+        "text": [
+          "That's Cancelled",
+          "Done! ✔️"
+        ]
+      },
+      "FallBack": {
+        "Misunderstood": {
+          "text": [
+            "I'm sorry i didn't get that, can you try again ?",
+            "Sorry what was that?"
+          ]
+        }
+      },
+      "Help": {
+        "text": [
+          "To get started have a look at the Readme markdown in the parent folder 📘. There are gifs and easy to follow instructions. You can edit my appearance by changing the variables in the frontend. Then you can edit my content in the spreadsheet. You can change the seed files for the cards and quickreplies to suit your chatbot needs. ",
+          "The best way to get help is to check the readme file. 📘"
+        ]
+      },
+      "Joke": {
+        "Response": {
+          "text": [
+            "Q: Whats the best thing about Switzerland?. A: Not sure but the flag is a big plus!",
+            "Q: Why do we tell actors to break a leg?. A: Because every play has a cast!",
+            "Q: How much room is needed for fungi to grow?. A: As mushroom as possible! 🍄"
+          ]
+        }
+      },
+      "Cardtype": {
+        "text": [
+          "I can show you some example cards that you can use🃏. What type of card do you want to see?",
+          "I can show you some example cards for sure 🃏. just tell me what sort of example you want to see."
+        ]
+      },
+      "ShowCards": {
+        "text": [
+          "Here are some {cardType} for you to look at",
+          "Sure thing, check out these {cardType}. You can easily edit these. Then seed them to your database. Or call an external API!"
+        ]
+      }
+    }
+  }
+}
