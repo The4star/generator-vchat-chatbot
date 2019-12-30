@@ -122,7 +122,7 @@ const createSession = async (userId) => {
 
 const saveUserMessage = async (userText) => {
   const message = new Message({
-    speaker: 'me',
+    speaker: 'user',
     msg: userText
   })
   await message.save()
@@ -131,7 +131,7 @@ const saveUserMessage = async (userText) => {
 
 const saveBotMessage = async (botText, botQuickReplies, botCards) => {
   const message = new Message({
-    speaker: 'vchat',
+    speaker: '<%= chatbotName %>',
     msg: botText,
     cards: botCards ? [] : null,
     quickReplies: botQuickReplies ? [] : null

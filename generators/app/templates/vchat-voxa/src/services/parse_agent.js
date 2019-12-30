@@ -5,7 +5,7 @@ const path = require("path")
 const dfPath = path.resolve(__dirname, "../../speech-assets/dialogflow");
 
 const agentDetails = {
-    "description": "A chat bot boilerplate that speeds up development",
+    "description": "<%= chatbotDescription %>",
     "language": "en",
     "shortDescription": "",
     "examples": "",
@@ -17,7 +17,7 @@ const agentDetails = {
     "disableStackdriverLogs": true,
     "googleAssistant": {
       "googleAssistantCompatible": false,
-      "project": "vchat-kxtktc",
+      "project": "<%= chatbotName %>",
       "welcomeIntentSignInRequired": false,
       "startIntents": [],
       "systemIntents": [],

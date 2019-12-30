@@ -2,7 +2,7 @@
   {
     "action": "smalltalk.agent.acquaintance",
     "customAnswers": [
-      "I\u0027m VChat. a chatbot boilerplate that speeds up the development process."
+      "I\u0027m <%= chatbotName %>. a chatbot boilerplate that speeds up the development process."
     ]
   },
   {

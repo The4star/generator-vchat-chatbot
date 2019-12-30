@@ -1,3 +1,3 @@
-const deployedURL = "https://vchat-bot.netlify.com"
+const deployedURL = "https://<%= chatbotName %>-bot.netlify.com"
 
 export default deployedURL;

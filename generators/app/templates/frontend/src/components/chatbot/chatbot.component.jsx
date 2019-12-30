@@ -61,7 +61,7 @@ class Chatbot extends React.Component {
 
         try {
             let message = {
-                speaker: 'me',
+                speaker: 'user',
                 msg: text
             }
 
@@ -77,7 +77,7 @@ class Chatbot extends React.Component {
                 splitMessages.map(splitMessage => {
                     if (splitMessage.length  > 1) {
                         let message = {
-                        speaker: 'vchat',
+                        speaker: '<%= chatbotName %>',
                         msg:splitMessage
                         }
                         allMessages.push(message)  
@@ -87,7 +87,7 @@ class Chatbot extends React.Component {
             }
             if (payloads && payloads.fields && payloads.fields.cards) {
                 let message = {
-                    speaker: 'vchat',
+                    speaker: '<%= chatbotName %>',
                     cards: payloads.fields.cards.listValue.values
                 }
                 allMessages.push(message)
@@ -95,7 +95,7 @@ class Chatbot extends React.Component {
 
             if (payloads && payloads.fields && payloads.fields.quickReplies) {
                 let message = {
-                    speaker: 'vchat',
+                    speaker: '<%= chatbotName %>',
                     quickReplies: payloads.fields.quickReplies.listValue.values
                 }
                 allMessages.push(message)
@@ -136,7 +136,7 @@ class Chatbot extends React.Component {
                     splitMessages.map(splitMessage => {
                         if (splitMessage.length  > 1) {
                             let message = {
-                            speaker: 'vchat',
+                            speaker: '<%= chatbotName %>',
                             msg:splitMessage
                             }
                             allMessages.push(message)  
@@ -147,7 +147,7 @@ class Chatbot extends React.Component {
             // add card message
             if (payloads && payloads.fields && payloads.fields.cards) {
                 let message = {
-                    speaker: 'vchat',
+                    speaker: '<%= chatbotName %>',
                     cards: payloads.fields.cards.listValue.values
                 }
                 allMessages.push(message)
@@ -155,7 +155,7 @@ class Chatbot extends React.Component {
             // add quick reply message
             if (payloads && payloads.fields && payloads.fields.quickReplies) {
                 let message = {
-                    speaker: 'vchat',
+                    speaker: '<%= chatbotName %>',
                     quickReplies: payloads.fields.quickReplies.listValue.values
                 }
                 allMessages.push(message)

@@ -1,18 +1,18 @@
-# V-Chat serverless Backend
-
-<!-- ![tictactoe gif](./img/tictactoe.gif "Demo gif") -->
+# <%= chatbotName %> - Backend
+## <%= chatbotDescription %>
 
 ## Created By
-|[![Clinton Forster](./img/clinton_small.jpg)]
-https://github.com/The4Star 
+|[![<%= authorName %> ](link to your image here)]
+link to your github here
 |-----------|
-| Clinton Forster | 
+| author: <%= authorName %> | 
+| company: <%= companyName %> | 
 
-Deployed Site: 'insert here'
+Deployed Site: https://<%= chatbotName %>-bot.netlify.com/
 
 ## Purpose 
 
-the backend of the Vchat boilerplate for building chatbots
+The Backend of the <%= chatbotName %> chat bot.
 
 ## Technologies used
 
@@ -21,10 +21,11 @@ the backend of the Vchat boilerplate for building chatbots
 * Javascript 
 * Mongoose 
 * MongoDB
-* DialogFlow
-* Voxa
-* Serverless
+* Morgan
+* REACT
+* Dialogflow
+
 
 ## Functionality and Features
 
-'The backend functionality for the V-Chat chatbot-boilerplate. The backend handles authorisation and calls to dialogflow which then communicates with voxa via a webhook, returns a response to this backend which then returns a response to the frontend.' 
+The Backend for the <%= chatbotName %> chat bot.
