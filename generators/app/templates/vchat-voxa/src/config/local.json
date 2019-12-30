@@ -5,7 +5,7 @@
   },
   "googleAnalytics": {
     "trackingId": "UA-XXXX-X",
-    "appName": "vchat-voxa",
+    "appName": "<%= chatbotName %>-voxa",
     "ignoreUsers": [],
     "suppressSending": true
   }

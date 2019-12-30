@@ -1,7 +1,7 @@
 {
   "platforms": ["dialogflow"],
   "spreadsheets": [
-    "https://docs.google.com/spreadsheets/d/1ST9WnWJy5hO5IUs5jk5-6Hxr2DcEUek4bjIQgm9-c88/"
+    "Insert spreadsheet url here"
   ],
   "contentPath": "src/content",
   "viewsPath": "src/languageResources"

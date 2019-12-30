@@ -1,4 +1,4 @@
-service: vchat-voxa
+service: <%= chatbotName %>-voxa
 
 custom:
   config: ${file(src/config/index.js):asFunction}
