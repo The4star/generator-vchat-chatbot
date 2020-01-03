@@ -76,6 +76,11 @@ module.exports = class extends Generator {
       this.destinationPath(`${chatbotName} - Utterances-en-AU.xlsx`),
       {chatbotName, chatbotDescription, authorName, companyName}
     );
+
+    this.fs.copy(
+      this.templatePath(`set-up-imgs`),
+      this.destinationPath(`set-up-imgs`)
+    );
   }
   
   // Installs dependencies to the frontend folder 
@@ -88,7 +93,7 @@ module.exports = class extends Generator {
   end() {
     const { chatbotName } = this.answers
     this.log(
-      yosay(`Frontend, Backend and Voxa Folders have been created, to install dependencies cd into the folders and run "npm install" or "yarn install" then follow the instructions in the "set-up-${chatbotName}-step-by-step-guide" Markdown file in the root folder to see what the end product will look like head to https://vchat-bot.netlify.com/`)
+      yosay(`Frontend, Backend and Voxa Folders have been created, to install dependencies cd into the folders and run "npm install" or "yarn install" then follow the instructions in the "set-up-${chatbotName}-step-by-step-guide" Markdown file in the root folder. To see what the end product will look like head to https://vchat-bot.netlify.com/`)
     );
 
   }
