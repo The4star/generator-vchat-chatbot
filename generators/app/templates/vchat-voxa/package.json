@@ -1,5 +1,5 @@
 {
-  "name": "vchat-voxa",
+  "name": "<%= chatbotName %>-voxa",
   "version": "0.0.1",
   "main": "src/app/index.js",
   "scripts": {

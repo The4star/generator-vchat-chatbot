@@ -23,9 +23,9 @@ yarn install or npm install
 
 ![create credentials](./set-up-imgs/2.gif "Create credentials")
 
-* upload the <%= chatbotName %> - Utterances-en-AU.xlsx file to your google drive and *save it as a google sheet document*. You can then delete the xlsx version from your google drive.
+* upload the <%= chatbotName %> - Utterances-en-AU.xlsx file to your google drive and **make sure  you save it AS A GOOGLE SHEET DOCUMENT**. You can then **delete the xlsx version from your google drive after it has been converted to a google sheet document**.
 
-* open the <%= chatbotName %> - Utterances-en-AU google sheet and click share in the top right. Copy and paste the client email from the client_secret.json file into the box and click ok.
+* open the <%= chatbotName %> - Utterances-en-AU **GOOGLE SHEET** and click share in the top right. Copy and paste the client email from the client_secret.json file into the box and click ok.
 
 * Copy the link for your google sheet up until the / before *edit* and paste in into the interaction.json file where it says *paste your spreadsheet url here*
 
@@ -120,7 +120,7 @@ or
 npm dev 
 ```
 
-* You can then use postman to test the http://localhost:5000/df_text_query route with the following JSON. 
+* You can then use postman to test the http://localhost:5000/api/df_text_query route with the following JSON. 
 
 ```JSON
 {
