@@ -38,43 +38,44 @@ module.exports = class extends Generator {
       }
     ]);
 
+    const chatbotNameNoSpaces = this.answers.chatbotName.replace(/ /g,"-")
     this.log(
-      yosay(`Your chatbot is called ${chalk.green(this.answers.chatbotName)}`)
+      yosay(`Your chatbot is called ${chalk.green(chatbotNameNoSpaces)}`)
     )
 
   }
 
   writing() {
     const { chatbotName, chatbotDescription, authorName, companyName } = this.answers
-
+    const chatbotNameNoSpaces = chatbotName.replace(/ /g,"-")
     this.fs.copyTpl(
       this.templatePath(`frontend`),
-      this.destinationPath(`${ chatbotName }-frontend`),
-      {chatbotName, chatbotDescription, authorName, companyName }
+      this.destinationPath(`${ chatbotNameNoSpaces }-frontend`),
+      {chatbotName: chatbotNameNoSpaces, chatbotDescription, authorName, companyName }
     );
 
     this.fs.copyTpl(
       this.templatePath('vchat-serverless-backend'),
-      this.destinationPath(`${ chatbotName }-serverless-backend`),
-      {chatbotName, chatbotDescription, authorName, companyName}
+      this.destinationPath(`${ chatbotNameNoSpaces }-serverless-backend`),
+      {chatbotName: chatbotNameNoSpaces, chatbotDescription, authorName, companyName}
     );
 
     this.fs.copyTpl(
       this.templatePath('vchat-voxa'),
-      this.destinationPath(`${ chatbotName }-voxa`),
-      {chatbotName, chatbotDescription, authorName, companyName}
+      this.destinationPath(`${ chatbotNameNoSpaces }-voxa`),
+      {chatbotName: chatbotNameNoSpaces, chatbotDescription, authorName, companyName}
     );
 
     this.fs.copyTpl(
       this.templatePath('set-up-your-chatbot-step-by-step-guide.md'),
-      this.destinationPath(`set-up-${chatbotName}-step-by-step-guide.md`),
-      {chatbotName, chatbotDescription, authorName, companyName}
+      this.destinationPath(`set-up-${chatbotNameNoSpaces}-step-by-step-guide.md`),
+      {chatbotName: chatbotNameNoSpaces, chatbotDescription, authorName, companyName}
     );
 
     this.fs.copyTpl(
       this.templatePath('vchat - Utterances-en-AU.xlsx'),
-      this.destinationPath(`${chatbotName} - Utterances-en-AU.xlsx`),
-      {chatbotName, chatbotDescription, authorName, companyName}
+      this.destinationPath(`${chatbotNameNoSpaces} - Utterances-en-AU.xlsx`),
+      {chatbotName: chatbotNameNoSpaces, chatbotDescription, authorName, companyName}
     );
 
     this.fs.copy(
