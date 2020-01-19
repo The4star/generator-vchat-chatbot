@@ -11,7 +11,7 @@ import TypingDots from './typing-dots/typing-dots.component'
 import './chatbot.styles.scss'
 
 // site where live chat bot is deployed set in src/helpers/deployed-url
-import { deployedURL, apiURL } from '../../helpers/variables'
+import { deployedURL, apiURL }  from '../../helpers/variables'
 
 const cookies = new Cookies();
 
@@ -30,6 +30,7 @@ class Chatbot extends React.Component {
           cookies.set('userId', uuid(), {path: '/'})  
         }
     }
+
     resolveAfterXSeconds = (x) => {
         return new Promise((resolve, reject) => {
             setTimeout(() =>{ 
@@ -37,12 +38,15 @@ class Chatbot extends React.Component {
             }, x * 1000)
         })
     }
+
     componentDidMount = async () => {
         await this.getChatHistory();
     }
 
     componentDidUpdate = () => {
+      if (!process.env.JEST_WORKER_ID) {
         this.messagesEnd.scrollIntoView({behaviour: 'smooth'})
+      }
     }
     
     getChatHistory = async () => {
@@ -50,7 +54,6 @@ class Chatbot extends React.Component {
       const data = response.data 
       
       if(data.previousSession && data.response.messages.length > 0) {
-        console.log(data.response.messages.length)
         this.setState({messages: [...data.response.messages]});
       } else {
         await this.eventQuery('Welcome');
@@ -101,23 +104,8 @@ class Chatbot extends React.Component {
                 allMessages.push(message)
             }
 
-            const printMessageswithdelay = async (messageToPrint) => {
-                const messageAmount = allMessages.length 
-                
-                if (messageToPrint === messageAmount) {
-                    this.setState({ hideDots: true })
-                    return
-                } else {
-                    if (messageToPrint !== 0) {
-                        await this.resolveAfterXSeconds(2)
-                    } 
-                    this.setState({ messages: [...this.state.messages, allMessages[messageToPrint]] })
-                    messageToPrint += 1
-                    printMessageswithdelay(messageToPrint)
-                }
-                
-            }
-            printMessageswithdelay(0)
+          
+            this.printMessageswithdelay(allMessages, 0)
         } catch (error) {
             console.log(error)
         }
@@ -162,28 +150,30 @@ class Chatbot extends React.Component {
             }
             
             this.setState({hideDots: false})
-            const printMessageswithdelay = async (messageToPrint) => {
-                const messageAmount = allMessages.length 
-                
-                if (messageToPrint === messageAmount) {
-                    this.setState({ hideDots: true })
-                    return
-                } else {
-                    if (messageToPrint !== 0) {
-                        await this.resolveAfterXSeconds(2)
-                    } 
-                    this.setState({ messages: [...this.state.messages, allMessages[messageToPrint]] })
-                    messageToPrint += 1
-                    printMessageswithdelay(messageToPrint)
-                }  
-            }
             
-            printMessageswithdelay(0)
+            this.printMessageswithdelay(allMessages, 0)
         } catch (error) {
             console.log(error)
         }
 
     }
+
+    printMessageswithdelay = async (messages, messageToPrint) => {
+      const messageAmount = messages.length 
+      
+      if (messageToPrint === messageAmount) {
+          this.setState({ hideDots: true })
+          return
+      } else {
+          if (messageToPrint !== 0) {
+              await this.resolveAfterXSeconds(2)
+          } 
+          this.setState({ messages: [...this.state.messages, messages[messageToPrint]] })
+          messageToPrint += 1
+          this.printMessageswithdelay(messages, messageToPrint)
+      }
+      
+  }
 
     renderMessages = (stateMessages) => {
         if(stateMessages) {
@@ -192,6 +182,8 @@ class Chatbot extends React.Component {
                    return <Message key={i} speaker={message.speaker} text={message.msg} /> 
                 } else if (message.cards)  {
                     return <Message key={i} speaker={message.speaker} cards={message.cards} cardStyle/> 
+                  } else if (message.script)  {
+                    return <Message key={i} speaker={message.speaker} text={message.script} scriptStyle/> 
                 } else {
                     return <Message key={i} speaker={message.speaker} quickReplies={message.quickReplies} handleQuickReply={this.handleQuickReply} qRStyle/> 
                 }
@@ -207,8 +199,17 @@ class Chatbot extends React.Component {
         this.textQuery(payload);
     }
 
-    toggleBot = () => {
-        this.setState({hidden: !this.state.hidden})
+    toggleBot = async () => {
+      const chatbot = document.querySelector('.chatbot') 
+      const  messagesContainer = document.querySelector('.messages-container')
+
+      if (chatbot && this.state.hidden === false) {
+        chatbot.classList = 'chatbot disappear';
+        messagesContainer.classList = 'messages-container disappear';
+        await this.resolveAfterXSeconds(.4) 
+      }
+    
+      this.setState({hidden: !this.state.hidden})
     }
 
     handleSubmit = async(e) => {
@@ -222,6 +223,68 @@ class Chatbot extends React.Component {
             return
         }
         
+    }
+
+    getInjectionScript = () => {
+      let injectionScript = `<div id="chatbot"></div>`
+      const scripts = document.querySelectorAll('script')
+      const links = document.querySelectorAll('link')
+
+      scripts.forEach(script => {
+        if (script.src) {
+        injectionScript += `<script src="${script.src}"></script>`
+        } else {
+          injectionScript += script.outerHTML
+        }
+      })
+
+      links.forEach((link, i) => {
+        if (i > 1 && i < 4) {
+        injectionScript += link.outerHTML
+        }
+        if (i === 5) {
+        injectionScript += `<link href="${link.href}" rel="stylesheet">`
+        }
+      })
+    
+      const scriptMessage = `Your injection script has been copied to your clipboard. You can now paste it into your website just before the closing </body> tag. If you accidentally copy something else you can copy the script again from below`
+      const allMessages = []
+      const splitMessages = scriptMessage.split(".", 5)
+      splitMessages.map(splitMessage => {
+          if (splitMessage.length  > 1) {
+              let message = {
+              speaker: '<%= chatbotName %>',
+              msg:splitMessage
+              }
+              allMessages.push(message)  
+          }
+          return allMessages
+      })
+      this.copyToClipboard(injectionScript)
+      const scriptMsg = {
+        speaker: '<%= chatbotName %>',
+        script: injectionScript
+      }
+      allMessages.push(scriptMsg)
+      this.setState({hideDots: false})
+      this.printMessageswithdelay(allMessages, 0)
+    }
+
+    copyToClipboard = (str) => {
+
+      const el = document.createElement('textarea');
+      el.value = str;
+      el.setAttribute('readonly', '')
+      el.style = {position: 'absolute', left: '-9999px'};
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+    isDeployedSite = () => {
+      if (window.location.href === deployedURL) {
+        return true
+      }
     }
     
     render() {
@@ -243,6 +306,13 @@ class Chatbot extends React.Component {
                           <img src={`${deployedURL}/img/logo.jpg`} alt="logo"/>  
                         </div>
                         <div className="text">
+                          {
+                            this.isDeployedSite() ? 
+                            <p className="injection-button" onClick={() => this.getInjectionScript()}>
+                                Injection Script
+                            </p> :  null
+                          }
+                             
                             <p className="close-button" onClick={() => this.toggleBot()}>
                                 Close
                             </p>  

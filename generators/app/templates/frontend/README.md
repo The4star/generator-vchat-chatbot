@@ -21,7 +21,6 @@ The frontend of the <%= chatbotName %> chat bot.
 * Javascript 
 * Mongoose 
 * MongoDB
-* Morgan
 * REACT
 * Dialogflow
 

@@ -22,7 +22,7 @@ describe('function testing', () => {
   })
   
   it('renders messages', () => {
-   expect(wrapper.instance().renderMessages([ { speaker: 'me', msg: 'hi' }  ])).toHaveLength(1)
-   expect(wrapper.instance().renderMessages([ { speaker: 'me', msg: 'hi' }, { speaker: 'vchat', msg: 'hi, im vchat' }  ])).toHaveLength(2)
+   expect(wrapper.instance().renderMessages([ { speaker: 'user', msg: 'hi' }  ])).toHaveLength(1)
+   expect(wrapper.instance().renderMessages([ { speaker: 'user', msg: 'hi' }, { speaker: '<%= chatbotName %>', msg: 'hi, im <%= chatbotName %>' }  ])).toHaveLength(2)
   })
 })

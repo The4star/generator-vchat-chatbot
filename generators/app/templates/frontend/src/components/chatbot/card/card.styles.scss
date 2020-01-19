@@ -23,6 +23,7 @@
         font-size: 15px;
         color: black;
     }
+
     .price {
         color: #D64C4C;
     }
@@ -46,7 +47,7 @@
         border-radius: 5px;
         font-size: 18px;
         margin: 10px;
-        background: $chatbot-card-button-color;
+        background: $chatbot-card-button-color !important;
         color: antiquewhite;
         border: none;
         cursor: pointer;

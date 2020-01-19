@@ -80,13 +80,23 @@ or
 npm run watch
 ```
 
-* This will start the server and your webhook from dialogflow will be pointing to this address, you can then use the test input on the righthandside of dialogflow to check it is working. Try typing "hi". 
+* This will start the server and your webhook from dialogflow will be pointing to this address, you can then use the test input on the righthandside of dialogflow to check it is working. Try typing "hi".
 
 ## Editing the content of your chatbot.
 
 * You can edit all of the replies and utterences for your chatbot in the google spreadsheet you setup except for the small talk, to edit this you must manipulate the customSmalltalkResponses_en.json file.
 
 * Edit your quick replies and cards by manipulating the json files located at src > services > db > models > seedfiles.
+
+* Once you have updated the content run the following command to seed and update the database with your changes:
+
+``` terminal 
+yarn dbseed
+
+or
+
+npm run dbseed
+```
 
 ## Set up <%= chatbotName %>-serverless-backend.
 
@@ -106,7 +116,7 @@ yarn install or npm install
 
 ![df client](./set-up-imgs/5.gif "df client")
 
-* open the JSON file and copy and paste the project id, private key and client email into the appropriate fields in the .env file and the config/dev.js file. Also insert your language e.g en-AU or en-US and session ID which you can make up e.g <%= chatbotName %>-session.
+* open the JSON file and copy and paste the **project id, private key and client email** into the appropriate fields in the **.env** file **AND** the config/dev.js file. Also insert your language e.g en-AU or en-US and session ID which you can make up e.g <%= chatbotName %>-session.
 
 ## Testing 
 
@@ -138,6 +148,16 @@ npm dev
 }
 ```
 
+* Alernatively you can run the following command which will use prewritten tests with supertest to make sure the routes are working using a test mongo db database: 
+
+``` terminal 
+yarn test
+
+or
+
+npm test
+```
+
 ## Set up <%= chatbotName %>-frontend.
 
 * cd into the frontend folder and run *npm install* or *yarn install* whichever you prefer.
@@ -166,9 +186,9 @@ or
 npm run deploy
 ```
 
-* once deployed open the src/helpers/variables.js file and change the deployedURL to what you were given by netlify. The apiURL is set to localhost so if your voxa is running (yarn watch) in conjunction with ngrok, the dialogflow fulfilment url is correct and the backend is runnning (yarn start) you will be able to test the app. 
+* Once deployed open the src/helpers/variables.js file and change the deployedURL to what you were given by netlify. IT is important the make sure that the deployed URL ends with '/'. e.g "https://<%= chatbotName %>-bot.netlify.com/" The apiURL is set to localhost so if your voxa is running (yarn watch) in conjunction with ngrok, the dialogflow fulfilment url is correct and the backend is runnning (yarn start) you will be able to test the app. 
 
-* once you deploy your backend you can change the apiURL in this folder to the route your are given by your AWS Lambda. 
+* Once you deploy your backend you can change the apiURL in this folder to the route you are given by your AWS Lambda. 
 
 * To edit the appearance of the chatbot you can change the css variables in the src/style-variables.scss file.
 
@@ -185,20 +205,12 @@ NODE_ENV=production sls deploy
 
 * Once each is deployed you can change the fulfillment URL in dialogflow to the one provided by your voxa deployment and the apiURL in <%= chatbotName %>-frontend/src/helpers/variables.js to the one provided by your backend deployment. 
 
-## set up your injection script so you can add your chatbot to any website. 
+## Copy your injection script and add your chatbot to any website. 
 
-* In your <%= chatbotName %>-frontend/ folder you have the file injection-script.html. 
+* Once your frontend is deployed you will have an injection script button at the top of your chatbot. This will only appear on your netlify deployment, not locally and not if the injection script is being used on an alternate site. 
 
-* When you deploy your chatbot to netlify it gives you the filenames of where your scripts are deployed in the terminal. 
+![injection script button](./set-up-imgs/6.png "iscript")
 
-![deploy scripts](./set-up-imgs/6.png "deploy scripts")
+* Click this button and your custom injection script will be copied to your clipboard and vchat will give you instructions on how to use it. 
 
-* replace the filenames in the injection-script.html file with the 3 first filenames. Your filenames will have the same start and end but a different number in the middle. 
-
-* You will need to also copy and replace the minified script, the easiest way to do this is by opening the deployed bot in the browser and copying it from the developer tools. 
-
-![deploy scripts](./set-up-imgs/8.gif "deploy scripts")
-
-Then you can copy your script to any website and there's your chatbot! 
-
-![injection script](./set-up-imgs/7.png "injection script")
+* If the injection script button is not appearing go to src > helpers > variables.js and make sure the url is in the correct format with a forward slash '/' at the end of the address e.g "https://<%= chatbotName %>-bot.netlify.com/".
