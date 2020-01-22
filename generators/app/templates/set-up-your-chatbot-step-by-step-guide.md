@@ -47,7 +47,7 @@ npm run interaction
 
 ## Set up the database 
 
-* open the .env file in your <%= chatbotName %>-voxa folder and change the username and password to your mongodb username and password.
+* open the .env file in your <%= chatbotName %>-voxa folder and change the MongoDB URL to the url provided to you by MongoDB atlas to collect to your collection.
 
 * In terminal run the command: 
 
@@ -110,13 +110,13 @@ yarn install or npm install
 
 * Rename this.copy.env and this.copy.gitignore to .env and .gitignore.
 
-* in the .env file change the username and password in the Mongodb Url to your mondodb username and password. 
+* in the .env file change the MongoDB URL to the url provided to you by MongoDB atlas to collect to your collection. 
 
 * Head to https://console.developers.google.com/apis/dashboard?project=YOUR_PROJECT_ID_HERE. Click credentials > create credentials > service account key. Make a new service account called dialogflow-client and give it the role of *Dialogflow API Client*. Download the JSON file and keep it somewhere safe OUTSIDE your project folders. 
 
 ![df client](./set-up-imgs/5.gif "df client")
 
-* open the JSON file and copy and paste the **project id, private key and client email** into the appropriate fields in the **.env** file **AND** the config/dev.js file. Also insert your language e.g en-AU or en-US and session ID which you can make up e.g <%= chatbotName %>-session.
+* open the JSON file and copy and paste the **project id, private key and client email** into the appropriate fields in the **.env** file **AND** the **config/dev.js** file. Also insert your language e.g en-AU or en-US and session ID which you can make up e.g <%= chatbotName %>-session.
 
 ## Testing 
 
@@ -139,7 +139,7 @@ npm dev
 }
 ```
 
-* You can also test the to test the http://localhost:5000/df_event_query route with the following JSON. 
+* You can also test the to test the http://localhost:5000/api/df_event_query route with the following JSON. 
 
 ```JSON
 {
@@ -186,11 +186,21 @@ or
 npm run deploy
 ```
 
-* Once deployed open the src/helpers/variables.js file and change the deployedURL to what you were given by netlify. IT is important the make sure that the deployed URL ends with '/'. e.g "https://<%= chatbotName %>-bot.netlify.com/" The apiURL is set to localhost so if your voxa is running (yarn watch) in conjunction with ngrok, the dialogflow fulfilment url is correct and the backend is runnning (yarn start) you will be able to test the app. 
+* Once deployed open the src/helpers/variables.js file and change the deployedURL to what you were given by netlify. IT is important the make sure that the deployed URL ends with forward slash '/'. e.g "https://<%= chatbotName %>-bot.netlify.com/" The apiURL is set to localhost so if your voxa is running (yarn watch) in conjunction with ngrok, the dialogflow fulfilment url is correct and the backend is runnning (yarn start) you will be able to test the app. 
 
 * Once you deploy your backend you can change the apiURL in this folder to the route you are given by your AWS Lambda. 
 
 * To edit the appearance of the chatbot you can change the css variables in the src/style-variables.scss file.
+
+* You can test the functionality of the chatbot using the prewritten tests in jest and enzyme by running the following command.
+
+``` terminal 
+yarn test
+
+or
+
+npm test
+```
 
 ## Deploy the <%= chatbotName %>-serverless-backend and <%= chatbotName %>-voxa
 
