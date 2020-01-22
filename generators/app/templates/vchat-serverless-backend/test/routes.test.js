@@ -40,7 +40,7 @@ describe('testing Dialogflow routes ', () => {
       expect(res.body.webhookPayload.fields.cards).toBeTruthy();
   })
 
-  it('successfully performs a query that quick replies', async () => {
+  it('successfully performs a query that contains quick replies', async () => {
     const res = await request(app)
       .post('/api/df_text_query')
       .send({
